@@ -59,8 +59,10 @@ function drawImageFit(img) {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont('serif');
+  let baseSize = min(windowWidth, windowHeight);
+  textSize(baseSize * 0.03); 
+
   textAlign(CENTER, CENTER);
-  textSize(20);
   canvasBuffer = createGraphics(windowWidth, windowHeight);
   canvasBuffer.clear();
 }
