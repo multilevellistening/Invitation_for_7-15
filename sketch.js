@@ -91,7 +91,7 @@ function drawScroll() {
   rect(0, 0, width, height); // 全画面にオーバーレイ
 
   fill(255); // テキストは白などにして見やすく
-  textSize(10);
+  textSize(15);
   for (let i = 0; i < lines.length; i++) {
     let y = height / 2 + scrollOffset + i * 40;
     text(lines[i], width / 2, y);
@@ -111,7 +111,7 @@ function drawEnd() {
   fill(255);
  
  
-  textSize(11);
+  textSize(15);
  text("そこへゆこうとして\n　\nことばはつまずき\n　\nことばをおいこそうとして\n \nたましいはあえぎ\n \nけれどそのたましいのさきに\n \nかすかなともしびのようなものがみえる\n \nそこへゆこうとして\n \nゆめはばくはつし\n \nゆめをつらぬこうとして\n \nくらやみはかがやき\n \nけれどそのくらやみのさきに\n \nまだおおきなあなのようなものがみえる\n \n\n　— 谷川俊太郎『選ばれた場所』", width / 2, height - 280);
 }
 
