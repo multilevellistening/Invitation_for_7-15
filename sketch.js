@@ -4,7 +4,7 @@ let scrollOffset = 0;
 let canvasBuffer;
 
 let lines = [
-  "招待状じゃありませんよ",
+  "招待状",
   "",
   "7月15日の火曜会では",
   "持ち寄った※紙 を大きな画用紙に貼り",
