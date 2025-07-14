@@ -57,12 +57,10 @@ function drawImageFit(img) {
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  textFont('serif');
-  let baseSize = min(windowWidth, windowHeight);
-  textSize(baseSize * 0.03); 
-
-  textAlign(CENTER, CENTER);
+    createCanvas(windowWidth, windowHeight);
+ 　textFont("'Hiragino Mincho ProN', 'Times New Roman', serif");
+　textAlign(CENTER, CENTER);
+  textSize(20);
   canvasBuffer = createGraphics(windowWidth, windowHeight);
   canvasBuffer.clear();
 }
