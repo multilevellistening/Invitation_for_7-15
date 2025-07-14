@@ -1,7 +1,9 @@
+
 let state = "door";
 let doorImg, scrollBgImg, endImg, drawImg;
 let scrollOffset = 0;
 let canvasBuffer;
+let baseFontSize;
 
 let lines = [
   "招待状",
@@ -40,11 +42,9 @@ function drawImageFit(img) {
   let drawWidth, drawHeight;
 
   if (imgAspect > canvasAspect) {
-    // 画像の方が横長 → 幅を合わせて高さを縮める
     drawWidth = width;
     drawHeight = width / imgAspect;
   } else {
-    // 画像の方が縦長 → 高さを合わせて幅を縮める
     drawHeight = height;
     drawWidth = height * imgAspect;
   }
@@ -55,16 +55,15 @@ function drawImageFit(img) {
   image(img, x, y, drawWidth, drawHeight);
 }
 
-let baseFontSize;
 function setup() {
-   
-    let safeHeight = document.documentElement.clientHeight; // ← スマホでも正しい高さを取得
-  createCanvas(windowWidth, safeHeight);                  // ← 高さに safeHeight を使用
+  let safeHeight = document.documentElement.clientHeight;
+  createCanvas(windowWidth, safeHeight);
 
-  textAlign(CENTER, CENTER);
+  baseFontSize = min(windowWidth, safeHeight) * 0.045;
+
   textFont('serif');
-  textSize(min(windowWidth, safeHeight) * 0.045); // スマホでも見やすい文字サイズに
-
+  textAlign(CENTER, CENTER);
+  textSize(baseFontSize);
 
   canvasBuffer = createGraphics(windowWidth, windowHeight);
   canvasBuffer.clear();
@@ -83,9 +82,8 @@ function draw() {
 }
 
 function drawDoor() {
- background(255); 
+  background(255);
   drawImageFit(doorImg);
-
 }
 
 function drawScroll() {
@@ -96,12 +94,8 @@ function drawScroll() {
   rect(0, 0, width, height);
 
   fill(255);
-  
-  // 🔽 小さめの文字サイズ
   let scrollFontSize = baseFontSize * 0.8;
   textSize(scrollFontSize);
-
-  // 🔽 行間広め
   let lineHeight = scrollFontSize * 1.8;
 
   for (let i = 0; i < lines.length; i++) {
@@ -115,47 +109,24 @@ function drawScroll() {
   }
 }
 
-
 function drawEnd() {
   background(255);
   drawImageFit(endImg);
 
   fill(255);
-  
-  // 🔽 少し小さめの文字サイズ
   textSize(baseFontSize * 0.5);
   textAlign(CENTER, TOP);
-  
-  // 🔽 行ごとに分割して描画（行間を大きく）
+
   let poemLines = [
-    "そこへゆこうとして",
-    "",
-    "ことばはつまずき",
-    "",
-    "ことばをおいこそうとして",
-    "",
-    "たましいはあえぎ",
-    "",
-    "けれどそのたましいのさきに",
-    "",
-    "かすかなともしびのようなものがみえる",
-    "",
-    "そこへゆこうとして",
-    "",
-    "ゆめはばくはつし",
-    "",
-    "ゆめをつらぬこうとして",
-    "",
-    "くらやみはかがやき",
-    "",
-    "けれどそのくらやみのさきに",
-    "",
-    "まだおおきなあなのようなものがみえる",
-    "",
+    "そこへゆこうとして", "", "ことばはつまずき", "", "ことばをおいこそうとして", "",
+    "たましいはあえぎ", "", "けれどそのたましいのさきに", "",
+    "かすかなともしびのようなものがみえる", "", "そこへゆこうとして", "",
+    "ゆめはばくはつし", "", "ゆめをつらぬこうとして", "", "くらやみはかがやき", "",
+    "けれどそのくらやみのさきに", "", "まだおおきなあなのようなものがみえる", "",
     "— 谷川俊太郎『選ばれた場所』"
   ];
 
-  let lineHeight = baseFontSize * 1.8; // 🔽 行間を広めに設定
+  let lineHeight = baseFontSize * 1.8;
   let startY = height * 0.15;
 
   for (let i = 0; i < poemLines.length; i++) {
@@ -164,7 +135,7 @@ function drawEnd() {
 }
 
 function drawInteractive() {
-  if (drawImg) background(255);
+  background(255);
   drawImageFit(drawImg);
   image(canvasBuffer, 0, 0);
 }
