@@ -1,4 +1,3 @@
-
 let state = "door";
 let doorImg, scrollBgImg, endImg, drawImg;
 let scrollOffset = 0;
