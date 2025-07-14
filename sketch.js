@@ -127,7 +127,7 @@ function drawEnd() {
   ];
 
   let lineHeight = baseFontSize * 1.8;
-  let startY = height * 0.15;
+  let startY = height * 0.20;
 
   for (let i = 0; i < poemLines.length; i++) {
     text(poemLines[i], width / 2, startY + i * lineHeight);
