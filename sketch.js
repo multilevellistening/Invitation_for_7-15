@@ -57,13 +57,14 @@ function drawImageFit(img) {
 
 let baseFontSize;
 function setup() {
-    createCanvas(windowWidth, windowHeight);
- 　textFont("'Hiragino Mincho ProN', 'Times New Roman', serif");
+   
+    let safeHeight = document.documentElement.clientHeight; // ← スマホでも正しい高さを取得
+  createCanvas(windowWidth, safeHeight);                  // ← 高さに safeHeight を使用
 
+  textAlign(CENTER, CENTER);
+  textFont('serif');
+  textSize(min(windowWidth, safeHeight) * 0.045); // スマホでも見やすい文字サイズに
 
-  baseFontSize = min(windowWidth, windowHeight) * 0.045; // 画面サイズに応じた文字サイズ
-  textSize(baseFontSize);
-　textAlign(CENTER, CENTER);
 
   canvasBuffer = createGraphics(windowWidth, windowHeight);
   canvasBuffer.clear();
