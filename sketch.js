@@ -87,7 +87,7 @@ function drawScroll() {
 
   fill(255);
   textSize(baseFontSize);
-  let lineHeight = baseFontSize * 1.6;
+  let lineHeight = baseFontSize * 1.2;
 
   for (let i = 0; i < lines.length; i++) {
     let y = height / 3 + scrollOffset + i * lineHeight;
@@ -107,7 +107,7 @@ function drawEnd() {
   fill(255);
   textSize(baseFontSize * 0.6);
   let poem = "そこへゆこうとして\n　\nことばはつまずき\n　\nことばをおいこそうとして\n \nたましいはあえぎ\n \nけれどそのたましいのさきに\n \nかすかなともしびのようなものがみえる\n \nそこへゆこうとして\n \nゆめはばくはつし\n \nゆめをつらぬこうとして\n \nくらやみはかがやき\n \nけれどそのくらやみのさきに\n \nまだおおきなあなのようなものがみえる\n \n\n　— 谷川俊太郎『選ばれた場所』";
-  text(poem, width / 2, height - 300);
+  text(poem, width / 2, height - 400);
 }
 
 function drawInteractive() {
