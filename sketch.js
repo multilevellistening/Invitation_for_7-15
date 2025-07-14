@@ -109,15 +109,15 @@ function drawScroll() {
 }
 
 function drawEnd() {
-  if (endImg) background(255)
+  background(255);
   drawImageFit(endImg);
-  
-  
+
   fill(255);
- 
- 
-  textSize(11);
- text("そこへゆこうとして\n　\nことばはつまずき\n　\nことばをおいこそうとして\n \nたましいはあえぎ\n \nけれどそのたましいのさきに\n \nかすかなともしびのようなものがみえる\n \nそこへゆこうとして\n \nゆめはばくはつし\n \nゆめをつらぬこうとして\n \nくらやみはかがやき\n \nけれどそのくらやみのさきに\n \nまだおおきなあなのようなものがみえる\n \n\n　— 谷川俊太郎『選ばれた場所』", width / 2, height - 320);
+  textSize(baseFontSize * 0.6);
+  let poem = "そこへゆこうとして\n　\nことばはつまずき\n　\nことばをおいこそうとして\n \nたましいはあえぎ\n \nけれどそのたましいのさきに\n \nかすかなともしびのようなものがみえる\n \nそこへゆこうとして\n \nゆめはばくはつし\n \nゆめをつらぬこうとして\n \nくらやみはかがやき\n \nけれどそのくらやみのさきに\n \nまだおおきなあなのようなものがみえる\n \n\n　— 谷川俊太郎『選ばれた場所』";
+
+  // 表示位置を「下から固定」→「画面の80%の高さ」に変更
+  text(poem, width / 2, height * 0.8);
 }
 
 function drawInteractive() {
