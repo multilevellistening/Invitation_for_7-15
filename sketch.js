@@ -95,7 +95,7 @@ function drawScroll() {
   rect(0, 0, width, height); // 全画面にオーバーレイ
 
   fill(255); // テキストは白などにして見やすく
-  textSize(100);
+  textSize(15);
   for (let i = 0; i < lines.length; i++) {
     let y = height / 2 + scrollOffset + i * 40;
     text(lines[i], width / 2, y);
