@@ -2,7 +2,6 @@ let state = "door";
 let doorImg, scrollBgImg, endImg, drawImg;
 let scrollOffset = 0;
 let canvasBuffer;
-let baseFontSize;
 
 let lines = [
   "招待状",
@@ -32,15 +31,42 @@ function preload() {
   drawImg = loadImage("draw.jpg", onImageLoadError);
 }
 
-function setup() {
-  let safeHeight = document.documentElement.clientHeight;
-  createCanvas(windowWidth, safeHeight);
+function drawImageFit(img) {
+  if (!img) return;
 
-  baseFontSize = min(windowWidth, safeHeight) * 0.045;
+  let imgAspect = img.width / img.height;
+  let canvasAspect = width / height;
+
+  let drawWidth, drawHeight;
+
+  if (imgAspect > canvasAspect) {
+    // 画像の方が横長 → 幅を合わせて高さを縮める
+    drawWidth = width;
+    drawHeight = width / imgAspect;
+  } else {
+    // 画像の方が縦長 → 高さを合わせて幅を縮める
+    drawHeight = height;
+    drawWidth = height * imgAspect;
+  }
+
+  let x = (width - drawWidth) / 2;
+  let y = (height - drawHeight) / 2;
+
+  image(img, x, y, drawWidth, drawHeight);
+}
+
+let baseFontSize;
+function setup() {
+   
+    let safeHeight = document.documentElement.clientHeight; // ← スマホでも正しい高さを取得
+  createCanvas(windowWidth, safeHeight);                  // ← 高さに safeHeight を使用
+
   textAlign(CENTER, CENTER);
   textFont('serif');
+  textSize(min(windowWidth, safeHeight) * 0.045); // スマホでも見やすい文字サイズに
 
-  canvasBuffer = createGraphics(windowWidth, safeHeight);
+
+  canvasBuffer = createGraphics(windowWidth, windowHeight);
   canvasBuffer.clear();
 }
 
@@ -56,62 +82,46 @@ function draw() {
   }
 }
 
-function drawImageFit(img) {
-  if (!img) return;
-  let imgAspect = img.width / img.height;
-  let canvasAspect = width / height;
-  let drawWidth, drawHeight;
-  if (imgAspect > canvasAspect) {
-    drawWidth = width;
-    drawHeight = width / imgAspect;
-  } else {
-    drawHeight = height;
-    drawWidth = height * imgAspect;
-  }
-  let x = (width - drawWidth) / 2;
-  let y = (height - drawHeight) / 2;
-  image(img, x, y, drawWidth, drawHeight);
-}
-
 function drawDoor() {
-  background(255);
+ background(255); 
   drawImageFit(doorImg);
+
 }
 
 function drawScroll() {
-  background(255);
-  drawImageFit(scrollBgImg);
+  background(255); // 念のため前の画面をクリア
+  drawImageFit(scrollBgImg); // 背景画像を中央に描画（縦横比保持）
 
-  fill(0, 0, 0, 183);
-  rect(0, 0, width, height);
+  fill(0, 0, 0, 183); // 半透明の黒
+  rect(0, 0, width, height); // 全画面にオーバーレイ
 
-  fill(255);
-  textSize(baseFontSize);
-  let lineHeight = baseFontSize * 1.2;
-
+  fill(255); // テキストは白などにして見やすく
+  textSize(15);
   for (let i = 0; i < lines.length; i++) {
-    let y = height / 3 + scrollOffset + i * lineHeight;
+    let y = height / 2 + scrollOffset + i * 40;
     text(lines[i], width / 2, y);
   }
 
-  let lastLineY = height / 3 + scrollOffset + lines.length * lineHeight;
+  let lastLineY = height / 2 + scrollOffset + lines.length * 40;
   if (lastLineY < height / 2 - 100) {
     state = "end";
   }
 }
 
 function drawEnd() {
-  background(255);
+  if (endImg) background(255)
   drawImageFit(endImg);
-
+  
+  
   fill(255);
-  textSize(baseFontSize * 0.6);
-  let poem = "そこへゆこうとして\n　\nことばはつまずき\n　\nことばをおいこそうとして\n \nたましいはあえぎ\n \nけれどそのたましいのさきに\n \nかすかなともしびのようなものがみえる\n \nそこへゆこうとして\n \nゆめはばくはつし\n \nゆめをつらぬこうとして\n \nくらやみはかがやき\n \nけれどそのくらやみのさきに\n \nまだおおきなあなのようなものがみえる\n \n\n　— 谷川俊太郎『選ばれた場所』";
-  text(poem, width / 2, height - 400);
+ 
+ 
+  textSize(11);
+ text("そこへゆこうとして\n　\nことばはつまずき\n　\nことばをおいこそうとして\n \nたましいはあえぎ\n \nけれどそのたましいのさきに\n \nかすかなともしびのようなものがみえる\n \nそこへゆこうとして\n \nゆめはばくはつし\n \nゆめをつらぬこうとして\n \nくらやみはかがやき\n \nけれどそのくらやみのさきに\n \nまだおおきなあなのようなものがみえる\n \n\n　— 谷川俊太郎『選ばれた場所』", width / 2, height - 320);
 }
 
 function drawInteractive() {
-  background(255);
+  if (drawImg) background(255);
   drawImageFit(drawImg);
   image(canvasBuffer, 0, 0);
 }
@@ -156,13 +166,6 @@ function mouseDragged() {
   }
 }
 
-function windowResized() {
-  let safeHeight = document.documentElement.clientHeight;
-  resizeCanvas(windowWidth, safeHeight);
-  baseFontSize = min(windowWidth, safeHeight) * 0.045;
-}
-
 function onImageLoadError(err) {
   console.warn("Image failed to load:", err);
 }
-
