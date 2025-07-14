@@ -111,7 +111,7 @@ function drawScroll() {
   fill(255);
   let scrollFontSize = baseFontSize * 0.8;
   textSize(scrollFontSize);
-  let lineHeight = scrollFontSize * 1.2;
+  let lineHeight = scrollFontSize * 1.8;
 
   for (let i = 0; i < lines.length; i++) {
     let y = height / 3 + scrollOffset + i * lineHeight;
