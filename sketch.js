@@ -126,7 +126,7 @@ function drawEnd() {
     "— 谷川俊太郎『選ばれた場所』"
   ];
 
-  let lineHeight = baseFontSize * 1.8;
+  let lineHeight = baseFontSize * 1.3;
   let startY = height * 0.20;
 
   for (let i = 0; i < poemLines.length; i++) {
