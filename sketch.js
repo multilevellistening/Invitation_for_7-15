@@ -89,35 +89,78 @@ function drawDoor() {
 }
 
 function drawScroll() {
-  background(255); // 念のため前の画面をクリア
-  drawImageFit(scrollBgImg); // 背景画像を中央に描画（縦横比保持）
+  background(255);
+  drawImageFit(scrollBgImg);
 
-  fill(0, 0, 0, 183); // 半透明の黒
-  rect(0, 0, width, height); // 全画面にオーバーレイ
+  fill(0, 0, 0, 183);
+  rect(0, 0, width, height);
 
-  fill(255); // テキストは白などにして見やすく
-  textSize(15);
+  fill(255);
+  
+  // 🔽 小さめの文字サイズ
+  let scrollFontSize = baseFontSize * 0.8;
+  textSize(scrollFontSize);
+
+  // 🔽 行間広め
+  let lineHeight = scrollFontSize * 1.8;
+
   for (let i = 0; i < lines.length; i++) {
-    let y = height / 2 + scrollOffset + i * 40;
+    let y = height / 3 + scrollOffset + i * lineHeight;
     text(lines[i], width / 2, y);
   }
 
-  let lastLineY = height / 2 + scrollOffset + lines.length * 40;
+  let lastLineY = height / 3 + scrollOffset + lines.length * lineHeight;
   if (lastLineY < height / 2 - 100) {
     state = "end";
   }
 }
+
 
 function drawEnd() {
   background(255);
   drawImageFit(endImg);
 
   fill(255);
-  textSize(baseFontSize * 0.6);
-  let poem = "そこへゆこうとして\n　\nことばはつまずき\n　\nことばをおいこそうとして\n \nたましいはあえぎ\n \nけれどそのたましいのさきに\n \nかすかなともしびのようなものがみえる\n \nそこへゆこうとして\n \nゆめはばくはつし\n \nゆめをつらぬこうとして\n \nくらやみはかがやき\n \nけれどそのくらやみのさきに\n \nまだおおきなあなのようなものがみえる\n \n\n　— 谷川俊太郎『選ばれた場所』";
+  
+  // 🔽 少し小さめの文字サイズ
+  textSize(baseFontSize * 0.5);
+  textAlign(CENTER, TOP);
+  
+  // 🔽 行ごとに分割して描画（行間を大きく）
+  let poemLines = [
+    "そこへゆこうとして",
+    "",
+    "ことばはつまずき",
+    "",
+    "ことばをおいこそうとして",
+    "",
+    "たましいはあえぎ",
+    "",
+    "けれどそのたましいのさきに",
+    "",
+    "かすかなともしびのようなものがみえる",
+    "",
+    "そこへゆこうとして",
+    "",
+    "ゆめはばくはつし",
+    "",
+    "ゆめをつらぬこうとして",
+    "",
+    "くらやみはかがやき",
+    "",
+    "けれどそのくらやみのさきに",
+    "",
+    "まだおおきなあなのようなものがみえる",
+    "",
+    "— 谷川俊太郎『選ばれた場所』"
+  ];
 
-  // 表示位置を「下から固定」→「画面の80%の高さ」に変更
-  text(poem, width / 2, height * 0.8);
+  let lineHeight = baseFontSize * 1.8; // 🔽 行間を広めに設定
+  let startY = height * 0.15;
+
+  for (let i = 0; i < poemLines.length; i++) {
+    text(poemLines[i], width / 2, startY + i * lineHeight);
+  }
 }
 
 function drawInteractive() {
