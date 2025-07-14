@@ -55,12 +55,16 @@ function drawImageFit(img) {
   image(img, x, y, drawWidth, drawHeight);
 }
 
-
+let baseFontSize;
 function setup() {
     createCanvas(windowWidth, windowHeight);
  　textFont("'Hiragino Mincho ProN', 'Times New Roman', serif");
+
+
+  baseFontSize = min(windowWidth, windowHeight) * 0.045; // 画面サイズに応じた文字サイズ
+  textSize(baseFontSize);
 　textAlign(CENTER, CENTER);
-  textSize(20);
+
   canvasBuffer = createGraphics(windowWidth, windowHeight);
   canvasBuffer.clear();
 }
